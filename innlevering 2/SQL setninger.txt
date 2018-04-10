@@ -1,0 +1,40 @@
+CREATE TABLE klasse( 
+klassekode CHAR(30) NOT NULL, 
+klassenavn VARCHAR(50) NOT NULL,
+PRIMARY KEY (klassekode));
+
+CREATE TABLE bilde(
+bildenr CHAR(3) NOT NULL, 
+opplastingsdato VARCHAR(10) NOT NULL, 
+filnavn VARCHAR(6) NOT NULL,
+beskrivelse CHAR(40) NOT NULL, 
+PRIMARY KEY (bildenr));
+
+CREATE TABLE student( 
+brukernavn CHAR(2) NOT NULL, 
+fornavn CHAR(10) NOT NULL, 
+etternavn CHAR(20) NOT NULL,
+klassekode CHAR(3) NOT NULL, 
+neste_leveringsfrist VARCHAR(10) NOT NULL,
+bildenr CHAR(3) NOT NULL,
+PRIMARY KEY (brukernavn),
+FOREIGN KEY (klassekode) REFERENCES klasse(klassekode),
+FOREIGN KEY (bildenr) REFERENCES bilde(bildenr));
+
+
+INSERT INTO klasse (klassekode, klassenavn) VALUES ('IT1','IT og informasjonssystemer 1.år');
+INSERT INTO klasse (klassekode, klassenavn) VALUES ('IT2','IT og informasjonssystemer 2.år');
+INSERT INTO klasse (klassekode, klassenavn) VALUES ('IT3','IT og informasjonssystemer 3.år');
+
+INSERT INTO bilde (bildenr, opplastingsdato, filnavn, beskrivelse) VALUES ('001','2018-03-01','sm.jpg','flott bilde av Shegaw');
+INSERT INTO bilde (bildenr, opplastingsdato, filnavn, beskrivelse) VALUES ('002','2018-04-01','gb.jpg','grusomt bilde av Geir');
+INSERT INTO bilde (bildenr, opplastingsdato, filnavn, beskrivelse) VALUES ('003','2018-04-15','mj.jpg','Marius i solnedgang');
+
+INSERT INTO student (brukernavn, fornavn, etternavn, klassekode, neste_leveringsfrist, bildenr) VALUES ('gb','Geir','Bjarvin','IT1','2018-03-01','002');
+INSERT INTO student (brukernavn, fornavn, etternavn, klassekode, neste_leveringsfrist, bildenr) VALUES ('mj','Marius','Johannesen','IT1','2018-03-01','003');
+INSERT INTO student (brukernavn, fornavn, etternavn, klassekode, neste_leveringsfrist, bildenr) VALUES ('sm','Shegaw','Mengiste','IT2','2018-05-01','001');
+
+CREATE TABLE bruker(
+brukernavn CHAR(10) NOT NULL, 
+passord VARCHAR(10) NOT NULL, 
+PRIMARY KEY (brukernavn));
